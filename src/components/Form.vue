@@ -33,7 +33,4 @@ const addValue = () => {
   $emit('update-internal-value', internalValue.value);
 };
 </script>
-<style>
-  .large {font-size: 30px;}
-  .border {border: 1px solid grey;}
-</style>
+
