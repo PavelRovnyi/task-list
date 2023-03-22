@@ -1,13 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
-const props = defineProps({
-  value: {
-    type: Number,
-    required: true
-  }
-})
-
 </script>
 
 <template>
@@ -15,10 +6,8 @@ const props = defineProps({
     <div class="flex flex-col w-full mb-2 h-full border-b">
       <div class="flex items-center justify-between text-lg border-b pb-1 mb-2">
         <div class="flex items-center">
-          <h3 class="font-semibold max-w-[240px] truncate mr-2">
-            make few database providers and repositories and make it work by config
-          </h3>
-          <span class="w-3 h-3 flex-shrink-0 rounded-full bg-gray-400"></span>
+          <h3 class="font-semibold max-w-[240px] truncate mr-2">Make task card component</h3>
+          <span class="w-3 h-3 flex-shrink-0 rounded-full bg-yellow-400"></span>
         </div>
         <button
           class="disabled:text-gray-200 text-red-500 hover:text-red-700 disabled:hover:text-gray-200 enabled:cursor-pointer"
@@ -49,28 +38,29 @@ const props = defineProps({
           ><span class="text-sm font-semibold">Completed: </span>
         </div>
         <div class="flex flex-col items-start gap-2">
-          <span class="text-sm font-normal">03/21/23 19:04:22 PM</span
-          ><span class="text-sm font-normal">-</span><span class="text-sm font-normal">-</span>
+          <span class="text-sm font-normal">03/20/23 19:56:59 PM</span
+          ><span class="text-sm font-normal">03/21/23 14:24:36 PM</span
+          ><span class="text-sm font-normal">-</span>
         </div>
       </div>
     </div>
     <div class="w-full flex items-center justify-between">
       <span class="mr-2"
         ><span class="text-sm font-semibold"
-          >Spent time: <span class="text-sm font-normal">0s</span></span
+          >Spent time: <span class="text-sm font-normal">6h 6m 3s</span></span
         ></span
       >
       <div class="flex items-center justify-end gap-2">
-        <button
+        <!----><button
           class="disabled:text-gray-200 text-green-500 hover:text-green-700 disabled:hover:text-gray-200 enabled:cursor-pointer"
-          title="Start"
+          title="Pause"
         >
           <svg
-            class="svg-inline--fa fa-circle-play fa-xl"
+            class="svg-inline--fa fa-circle-pause fa-xl"
             aria-hidden="true"
             focusable="false"
             data-prefix="far"
-            data-icon="circle-play"
+            data-icon="circle-pause"
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
@@ -78,10 +68,10 @@ const props = defineProps({
             <path
               class=""
               fill="currentColor"
-              d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"
+              d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm224-72V328c0 13.3-10.7 24-24 24s-24-10.7-24-24V184c0-13.3 10.7-24 24-24s24 10.7 24 24zm112 0V328c0 13.3-10.7 24-24 24s-24-10.7-24-24V184c0-13.3 10.7-24 24-24s24 10.7 24 24z"
             ></path>
           </svg></button
-        ><!----><!----><button
+        ><!----><button
           class="disabled:text-gray-200 text-green-500 hover:text-green-700 disabled:hover:text-gray-200 enabled:cursor-pointer"
           title="Complete"
         >

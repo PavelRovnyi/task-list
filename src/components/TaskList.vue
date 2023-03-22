@@ -1,35 +1,16 @@
+<script setup lang="ts">
+import Card from './Card.vue'
+</script>
 <template>
-  <div>
-    {{ internalValueLabel }}
-
-    <button @click="addValue">Add</button>
+  <div class="py-2 px-3 rounded">
+    <div class="mx-auto">
+      <ul
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-2 gap-4 text-gray-500 list-inside dark:text-gray-400"
+      >
+        <li class="bg-white min-h-[200px] p-3 border rounded-lg shadow">
+          <Card></Card>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
-<script setup lang="ts">
-import { ref, computed, watch } from 'vue';
-const $emit = defineEmits(['update-internal-value']);
-
-const props = defineProps({
-  value: {
-    type: Number,
-    required: true,
-  },
-});
-
-const internalValue = ref(props.value);
-watch(
-  () => props.value,
-  (newVal) => {
-    internalValue.value = newVal;
-  },
-);
-
-const internalValueLabel = computed(() => {
-  return `My current value: ${internalValue.value}`;
-});
-
-const addValue = () => {
-  internalValue.value++;
-  $emit('update-internal-value', internalValue.value);
-};
-</script>
