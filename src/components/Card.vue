@@ -1,12 +1,21 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { PropType } from 'vue'
+import type { Task } from  './TaskManager.vue'
+const props = defineProps({
+  task: {
+    type: Object as PropType<Task>,
+    required: true
+  }
+})
+</script>
 
 <template>
-  <li v-for="item in items" class="bg-white min-h-[200px] p-3 border rounded-lg shadow">
+  <li class="bg-white min-h-[200px] p-3 border rounded-lg shadow">
     <div class="flex flex-col items-start h-full">
       <div class="flex flex-col w-full mb-2 h-full border-b">
         <div class="flex items-center justify-between text-lg border-b pb-1 mb-2">
           <div class="flex items-center">
-            <h3 class="font-semibold max-w-[240px] truncate mr-2">Make task card component</h3>
+            <h3 class="font-semibold max-w-[240px] truncate mr-2">{{props.task.name}}</h3>
             <span class="w-3 h-3 flex-shrink-0 rounded-full bg-yellow-400"></span>
           </div>
           <button
