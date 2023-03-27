@@ -47,7 +47,7 @@ const props = defineProps({
             ><span class="text-sm font-semibold">Completed: </span>
           </div>
           <div class="flex flex-col items-start gap-2">
-            <span class="text-sm font-normal">03/20/23 19:56:59 PM</span
+            <span class="text-sm font-normal">{{props.task.createdAt}}</span
             ><span class="text-sm font-normal">03/21/23 14:24:36 PM</span
             ><span class="text-sm font-normal">-</span>
           </div>

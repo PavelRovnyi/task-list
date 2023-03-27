@@ -3,23 +3,23 @@ import TaskList from './TaskList.vue'
 import CreateTaskForm from './CreateTaskForm.vue'
 import { ref } from 'vue'
 export type Task = {
-  id: string,
-  name: string  
+  id: string
+  name: string
+  createdAt: string
 }
 
 const tasks = ref<Task[]>([])
 
-const addTask = (newTask:Task) => {
+const addTask = (newTask: Task) => {
   if (newTask.name) {
-    tasks.value.push(newTask)   
+    tasks.value.push(newTask)
   }
 }
-
 </script>
 <template>
   <div class="bg-white border-gray-200 px-5 sm:px-6 py-3 rounded dark:bg-gray-900">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
-      <CreateTaskForm @create="addTask"></CreateTaskForm>
+      <CreateTaskForm @create="addTask" type="primary"></CreateTaskForm>
     </div>
   </div>
 
