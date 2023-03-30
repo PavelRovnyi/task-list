@@ -4,6 +4,7 @@ import Assignments from './components/todo-list/Assignments.vue'
 
 <template>
   <div>
-    <Assignments></Assignments>
+    <Assignments type="muted" :processing="true">My Slot</Assignments>
   </div>
+
 </template>
