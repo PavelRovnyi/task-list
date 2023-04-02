@@ -1,5 +1,5 @@
 <template>
-  <input type="text" v-model="name" />
+  <input type="text" v-model.lazy="name" />
   <br />
   <strong>{{ name }}</strong>
 

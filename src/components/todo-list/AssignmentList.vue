@@ -44,6 +44,6 @@ const filteredAssigments = computed(() => {
   if (currentTag.value === 'all') {
     return props.assignments
   }
-  return props.assignments.map((a) => a.tag === currentTag.value)
+  return props.assignments.filter((assignment) => assignment.tag === currentTag.value)
 })
 </script>

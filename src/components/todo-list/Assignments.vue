@@ -1,5 +1,7 @@
 <template>
-  <section class="space-y-6">
+  <section class="space-y-6 flex flex-col">
+
+    
     <AssignmentList :assignments="filters.inProgress" title="In Progress"></AssignmentList>
     <AssignmentList :assignments="filters.completed" title="Completed"></AssignmentList>
     <CreateAssignment @addNewAssigment="add"></CreateAssignment>
