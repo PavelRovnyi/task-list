@@ -21,14 +21,16 @@ const filters = computed(() => {
 const add = (name: string) => {
   assignments.push({
     name: name,
-    isCompleted: false,
-    id: assignments.length + 1
+    isCompleted: false,   
+    id: assignments.length + 1,
+    tag: 'develop',
   })
 }
 
 let assignments = reactive([
-  { name: 'Start 01', isCompleted: false, id: 1 },
-  { name: 'Start 02', isCompleted: false, id: 2 },
-  { name: 'Start 03', isCompleted: false, id: 3 }
+  { name: 'Start 01', isCompleted: false, id: 1, tag: 'estimate' },
+  { name: 'Start 02', isCompleted: false, id: 2, tag: 'investigate' },
+  { name: 'Start 03', isCompleted: false, id: 3, tag: 'develop' },
+  { name: 'Start 04', isCompleted: false, id: 3, tag: 'develop'}
 ])
 </script>

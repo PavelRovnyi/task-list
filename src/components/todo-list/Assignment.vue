@@ -14,6 +14,7 @@ export interface AssignmentInterface {
   name: string
   id: number
   isCompleted: boolean
+  tag: string
 }
 
 const props = defineProps({

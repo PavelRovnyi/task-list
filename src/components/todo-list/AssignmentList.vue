@@ -5,9 +5,15 @@
         {{ title }}
         <span>{{ assignments.length }}</span>
       </h2>
-      <ul class="border boder-gray-600 divide-y divide-gray-600">
+
+      <AssignmentTags
+        v-model:currentTag="currentTag"
+        :initial-tags="assignments.map((a) => a.tag)"
+      ></AssignmentTags>
+
+      <ul class="border border-gray-600 divide-y divide-gray-600 mt-4">
         <Assignment
-          v-for="assignment in assignments"
+          v-for="assignment in filteredAssigments"
           :key="assignment.id"
           :assignment="assignment"
         ></Assignment>
@@ -17,10 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
-
+import { type PropType, computed, ref } from 'vue'
 import type { AssignmentInterface } from './Assignment.vue'
 import Assignment from './Assignment.vue'
+import AssignmentTags from './AssignmentTags.vue'
+
+const currentTag = ref('all')
 
 const props = defineProps({
   title: {
@@ -30,5 +38,12 @@ const props = defineProps({
     type: Array as PropType<AssignmentInterface[]>,
     default: () => []
   }
+})
+
+const filteredAssigments = computed(() => {
+  if (currentTag.value === 'all') {
+    return props.assignments
+  }
+  return props.assignments.map((a) => a.tag === currentTag.value)
 })
 </script>
