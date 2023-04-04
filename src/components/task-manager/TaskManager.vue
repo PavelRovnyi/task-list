@@ -26,6 +26,7 @@ const addTask = (newTask: Task) => {
   <div class="container mx-auto">
     <div class="h-full mx-auto relative">
       <TaskList :tasks="tasks"></TaskList>
+      <slot></slot>
     </div>
   </div>
 </template>

@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import Assignments from './components/todo-list/Assignments.vue'
-import Test from './components/Test.vue';
+import TaskManager from './components/task-manager/TaskManager.vue'
+import Test from './components/Test.vue'
 </script>
 
 <template>
-  <Assignments></Assignments>
+  <TaskManager> </TaskManager>
 </template>
