@@ -41,6 +41,6 @@ const add = (newAssigment: PropType<AssignmentInterface>) => {
 
 let assignments = reactive([
   { name: 'Implement task', isCompleted: false, id: 1, tag: 'develop' },
-  { name: 'Check code', isCompleted: false, id: 2, tag: 'develop' }
+  { name: 'Check result', isCompleted: false, id: 2, tag: 'develop' }
 ])
 </script>

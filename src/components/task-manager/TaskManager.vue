@@ -5,6 +5,8 @@ import { ref } from 'vue'
 export type Task = {
   id: string
   name: string
+  priority: string
+  sprint: string
   createdAt: string
 }
 

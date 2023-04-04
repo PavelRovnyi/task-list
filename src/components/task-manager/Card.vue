@@ -37,11 +37,11 @@
       <div
         class="flex items-center justify-center text-left px-2 rounded-lg text-sm capitalize font-semibold cursor-pointer bg-red-600 text-white py-1"
       >
-        <span>top</span
+        <span>{{ task.priority }}</span
         ><!---->
       </div>
       <div class="flex flex-grow items-center justify-center">
-        <span class="text-md font-bold">14h 20m 27s</span>
+        <span class="text-md font-bold">0s</span>
       </div>
       <div class="flex items-center justify-end gap-4">
         <button class="w-5 text-green-500 hover:text-green-700" title="Resume">
