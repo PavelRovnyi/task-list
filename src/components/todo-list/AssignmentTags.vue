@@ -15,12 +15,10 @@
 
 <script setup lang="ts">
 import { type PropType, computed } from 'vue'
-import type { AssignmentInterface } from './Assignment.vue'
-
 
 const props = defineProps({
   initialTags: Array,
-  currentTag:String
+  currentTag: String
 })
 
 const tags = computed(() => {

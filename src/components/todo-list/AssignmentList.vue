@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <section class="mt-5 ">
     <div v-if="assignments.length">
       <h2 class="font-bold mb-2">
         {{ title }}
-        <span>{{ assignments.length }}</span>
+        <span>({{ assignments.length }})</span>
       </h2>
 
       <AssignmentTags
@@ -11,7 +11,7 @@
         :initial-tags="assignments.map((a) => a.tag)"
       ></AssignmentTags>
 
-      <ul class="border border-gray-600 divide-y divide-gray-600 mt-4">
+      <ul class="border border-gray-600 divide-y divide-gray-600 mt-1">
         <Assignment
           v-for="assignment in filteredAssigments"
           :key="assignment.id"
