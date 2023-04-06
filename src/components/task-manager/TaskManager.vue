@@ -21,7 +21,7 @@ const addTask = (newTask: Task) => {
 <template>
   <div class="bg-white border-gray-200 px-5 sm:px-6 py-3 rounded dark:bg-gray-900">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
-      <CreateTaskForm @create="addTask" type="primary"></CreateTaskForm>
+      <CreateTaskForm @createTask="addTask" type="primary"></CreateTaskForm>
     </div>
   </div>
 

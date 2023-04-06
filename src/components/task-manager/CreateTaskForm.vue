@@ -32,14 +32,15 @@
       @click="
         () => {
           if (taskName.trim() !== '') {
-            emit('create', {
+            emit('createTask', {
               id: new Date().getTime().toString(),
               name: taskName,
-              priority: priorityValue,
-              sprint: sprintValue,
+              priority: setStringValue(priorityValue, 'low'),
+              sprint: setStringValue(sprintValue, 'backlog'),
               createdAt: new Date().toLocaleString(),
               timeSpend: 0
             })
+
             taskName = ''
             priorityValue = ''
             sprintValue = ''
@@ -57,10 +58,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const emit = defineEmits(['create'])
+const emit = defineEmits(['createTask'])
 const taskName = ref<string>('')
 const priorityValue = ref<string>('')
 const sprintValue = ref<string>('')
 const priorities = ['low', 'medium', 'hight', 'top']
 const sprints = ['sprint 1', 'sprint 2', 'backlog']
+
+function setStringValue(value: string, defaultVal: string) {
+  return value.trim().length ? value : defaultVal
+}
 </script>
