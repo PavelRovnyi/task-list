@@ -8,6 +8,7 @@ export type Task = {
   priority: string
   sprint: string
   createdAt: string
+  spendedTime: Date
 }
 
 const tasks = ref<Task[]>([])
@@ -17,6 +18,8 @@ const addTask = (newTask: Task) => {
     tasks.value.push(newTask)
   }
 }
+
+const removeTask = (taskId: number) => {}
 </script>
 <template>
   <div class="bg-white border-gray-200 px-5 sm:px-6 py-3 rounded dark:bg-gray-900">

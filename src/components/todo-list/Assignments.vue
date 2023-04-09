@@ -9,7 +9,7 @@
     <template v-if="toDoList">
       <AssignmentList :assignments="filters.inProgress" title="In Progress"></AssignmentList>
       <AssignmentList :assignments="filters.completed" title="Completed"></AssignmentList>
-      <CreateAssignment @addNewAssigment="add"></CreateAssignment>
+      <CreateAssignment @addNewAssigment="add" :tags="tags"></CreateAssignment>
     </template>
   </section>
 </template>
@@ -29,7 +29,7 @@ const filters = computed(() => {
   }
 })
 
-const add = (newAssigment: PropType<AssignmentInterface>) => {
+const add = (newAssigment: AssignmentInterface) => {
   if (newAssigment.name === undefined || newAssigment.name.trim().length === 0) return false
   assignments.push({
     name: newAssigment.name,
@@ -39,8 +39,6 @@ const add = (newAssigment: PropType<AssignmentInterface>) => {
   })
 }
 
-let assignments = reactive([
-  { name: 'Implement task', isCompleted: false, id: 1, tag: 'develop' },
-  { name: 'Check result', isCompleted: false, id: 2, tag: 'develop' }
-])
+const tags = ['estimate', 'investigate', 'develop']
+let assignments = reactive<AssignmentInterface[]>([])
 </script>

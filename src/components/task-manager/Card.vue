@@ -6,7 +6,7 @@
           <div
             class="flex items-center font-semibold min-h-[20px] min-w-[50px] max-w-[240px] cursor-pointer"
           >
-            <h3 class="truncate" title="{{task.name}}">
+            <h3 class="truncate" :title="task.name">
               {{ task.name }}
             </h3>
           </div>
@@ -97,7 +97,5 @@ const props = defineProps({
   }
 })
 
-const removeTask = () => {
-  alert('fghfghgfh')
-}
+
 </script>

@@ -7,7 +7,7 @@
         class="px-4 py-3 border border-gray-400 divide-y "
         v-model="newAssigmentTag"
       >
-        <option v-for="tag in defaultTags" :value="tag">{{ tag.toUpperCase() }}</option>
+        <option v-for="tag in tags" :value="tag">{{ tag.toUpperCase() }}</option>
       </select>
 
       <button
@@ -28,7 +28,11 @@ const newAssigmentTag = ref('develop')
 
 const $emit = defineEmits(['addNewAssigment'])
 
-const defaultTags = ['estimate', 'investigate', 'develop']
+const props = defineProps({ 
+  tags: Array,
+})
+
+
 
 const add = () => {
   $emit('addNewAssigment', { name: newAssigment.value, tag: newAssigmentTag })

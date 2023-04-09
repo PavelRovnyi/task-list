@@ -8,7 +8,7 @@
 
       <AssignmentTags
         v-model:currentTag="currentTag"
-        :initial-tags="assignments.map((a) => a.tag)"
+        :initial-tags="tags"
       ></AssignmentTags>
 
       <ul class="border border-gray-600 divide-y divide-gray-600 mt-1">
@@ -31,6 +31,9 @@ import AssignmentTags from './AssignmentTags.vue'
 const currentTag = ref('all')
 
 const props = defineProps({
+  tags: {
+    type: Array
+  },
   title: {
     type: String
   },
