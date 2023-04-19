@@ -19,7 +19,9 @@ const addTask = (newTask: Task) => {
   }
 }
 
-const removeTask = (taskId: number) => {}
+const removeTask = (newTask: Task) => {
+  alert('asdsads')
+}
 </script>
 <template>
   <div class="bg-white border-gray-200 px-5 sm:px-6 py-3 rounded dark:bg-gray-900">
@@ -30,7 +32,7 @@ const removeTask = (taskId: number) => {}
 
   <div class="container mx-auto">
     <div class="h-full mx-auto relative">
-      <TaskList :tasks="tasks"></TaskList>
+      <TaskList :tasks="tasks" @removeTaskEvent="removeTask"></TaskList>
       <slot></slot>
     </div>
   </div>

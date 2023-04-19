@@ -5,7 +5,7 @@
         <a href="/" class="flex items-center">
           <img src="/src/assets/images/logo.ico" class="h-8 mr-3" alt="Flowbite Logo" />
           <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
-            >To do planner</span
+            >ToDo planner</span
           >
         </a>
         <div class="flex items-center md:order-2">
@@ -52,21 +52,21 @@
                 href="#"
                 class="block py-2 pl-3 pr-4 text-blue-600 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-blue-500 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                 aria-current="page"
-                >Home</a
+                >Board</a
               >
             </li>
             <li>
               <a
                 href="#"
                 class="block py-2 pl-3 pr-4 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
-                >Team</a
+                >Posts</a
               >
             </li>
             <li>
               <a
                 href="#"
                 class="block py-2 pl-3 pr-4 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
-                >Contact</a
+                >Info</a
               >
             </li>
           </ul>

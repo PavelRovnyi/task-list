@@ -26,3 +26,7 @@ let name = ref('default string')
 
 let currentType = ref('typeA')
 </script>
+
+<style>
+
+</style>
