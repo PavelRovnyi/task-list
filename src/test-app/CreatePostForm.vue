@@ -40,7 +40,11 @@ import type { Post } from '@/test-app/types'
 const title = ref('')
 const body = ref('')
 
-const posts: Array<Post> = []
+const emits = defineEmits({
+  'new-post': (newPost: Post) => true
+})
+
+const posts: Post[] = []
 
 const createPost = () => {
   if (!title.value.trim() || !body.value.trim()) return false
@@ -50,8 +54,8 @@ const createPost = () => {
     title: title.value,
     body: body.value
   }
+  emits('new-post', newPost)
 
-  posts.push(newPost)
   title.value = ''
   body.value = ''
 }

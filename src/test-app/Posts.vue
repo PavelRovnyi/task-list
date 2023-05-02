@@ -1,15 +1,19 @@
 <template>
-  <PostsList :posts="DefaultPosts"></PostsList>
-  <CratePostForm></CratePostForm>
+  <PostsList :posts="defaultPosts"></PostsList>
+  <CratePostForm @new-post="handleNewPost"></CratePostForm>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import CratePostForm from '@/components/posts/CratePostForm.vue'
+import CratePostForm from '@/test-app/CreatePostForm.vue'
 import PostsList from '@/test-app/PostsList.vue'
 import type { Post } from '@/test-app/types'
 
-const DefaultPosts = ref<Array<Post>>([
+function handleNewPost(newPost: Post) {
+  defaultPosts.value.push(newPost)
+}
+
+const defaultPosts = ref<Array<Post>>([
   {
     id: 1,
     title: 'Post 1',
