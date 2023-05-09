@@ -1,5 +1,5 @@
 <template>
-  <PostsList :posts="defaultPosts"></PostsList>
+  <PostsList @remove="removePost" :posts="defaultPosts"> </PostsList>
   <CratePostForm @new-post="handleNewPost"></CratePostForm>
 </template>
 
@@ -13,7 +13,11 @@ function handleNewPost(newPost: Post) {
   defaultPosts.value.push(newPost)
 }
 
-const defaultPosts = ref<Array<Post>>([
+const removePost = (post: Post) => {
+  defaultPosts.value = defaultPosts.value.filter((p) => p.id !== post.id)
+}
+
+let defaultPosts = ref<Array<Post>>([
   {
     id: 1,
     title: 'Post 1',
