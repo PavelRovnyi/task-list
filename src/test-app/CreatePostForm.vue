@@ -4,11 +4,11 @@
     <form @submit.prevent="createPost">
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2" for="title">Title</label>
-        <CustomInput 
-        v-model:postTitle="title"
-        :inputPlaceholder="inputPlaceholder"
+        <CustomInput
+          v-model:postTitle="title"
+          :inputPlaceholder="'Enter title'"
+          :inputClass="'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'"
         ></CustomInput>
-
       </div>
       <div class="mb-6">
         <label class="block text-gray-700 font-bold mb-2" for="body">Body</label>

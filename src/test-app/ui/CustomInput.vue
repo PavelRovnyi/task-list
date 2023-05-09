@@ -2,10 +2,10 @@
   <input
     :value="postTitle"
     @input="handleInput"
-    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    :class="inputClass"
     :id="name"
     :type="type"
-    placeholder="Enter title"
+    :placeholder="inputPlaceholder"
   />
 </template>
 
@@ -30,14 +30,16 @@ defineProps({
   inputPlaceholder: {
     type: String,
     default: 'Enter title'
+  },
+  inputClass: {
+    type: String,
+    default: ''
   }
 })
 
 const emits = defineEmits(['update:postTitle'])
 
 const handleInput = (event: MyInputEvent) => {
-  console.log(event)
-
   const inputValue = event.target.value
   emits('update:postTitle', inputValue)
 }
