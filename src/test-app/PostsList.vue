@@ -1,9 +1,7 @@
 <template>
   <div class="wrap" v-if="posts.length > 0">
-    <h3 class="text-3xl font-bold dark:text-white text-center mt-10">
-      Posts list ({{ posts.length }})
-    </h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-10">
+    <h3 class="text-3xl font-bold dark:text-white text-center">Posts list ({{ posts.length }})</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-5">
       <PostsList
         v-for="post in posts"
         :key="post.id"
