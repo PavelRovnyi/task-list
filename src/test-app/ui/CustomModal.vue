@@ -52,7 +52,6 @@ defineProps({
 })
 
 const closeModal = () => {
-  console.log('closeModal')
   emits('showDialog', false)
 }
 </script>

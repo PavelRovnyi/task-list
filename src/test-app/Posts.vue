@@ -20,12 +20,12 @@ import type { Post } from '@/test-app/types'
 
 function handleNewPost(newPost: Post) {
   defaultPosts.value.push(newPost)
+  dialogVisible.value = false
 }
 
 let dialogVisible = ref(false)
 
 const openPopup = () => {
-  console.log('openPopup')
   dialogVisible.value = true
 }
 

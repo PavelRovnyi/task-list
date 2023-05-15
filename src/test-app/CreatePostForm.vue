@@ -6,7 +6,7 @@
         <label class="block text-gray-700 font-bold mb-2" for="create-post-id">Title</label>
         <CustomInput
           :id="'create-post-id'"
-          v-model:postTitle="title"
+          v-model:postTitle.trim="title"
           :inputPlaceholder="'Enter title'"
           :inputClass="'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'"
         ></CustomInput>
@@ -14,7 +14,7 @@
       <div class="mb-6">
         <label class="block text-gray-700 font-bold mb-2" for="body">Body</label>
         <textarea
-          v-model="body"
+          v-model.trim="body"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="body"
           placeholder="Enter body"
@@ -46,7 +46,9 @@ const emits = defineEmits({
 const posts: Post[] = []
 
 const createPost = () => {
-  if (!title.value.trim() || !body.value.trim()) return false
+  console.log(title.value)
+  console.log(body.value)
+  if (!title.value || !body.value) return false
 
   const newPost = {
     id: Date.now(),
