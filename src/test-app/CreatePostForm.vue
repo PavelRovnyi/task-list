@@ -3,8 +3,9 @@
     <h2 class="text-2xl font-bold mb-4">Create Post</h2>
     <form @submit.prevent="createPost">
       <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2" for="title">Title</label>
+        <label class="block text-gray-700 font-bold mb-2" for="create-post-id">Title</label>
         <CustomInput
+          :id="'create-post-id'"
           v-model:postTitle="title"
           :inputPlaceholder="'Enter title'"
           :inputClass="'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'"

@@ -3,9 +3,10 @@
     :value="postTitle"
     @input="handleInput"
     :class="inputClass"
-    :id="name"
+    :id="id"
     :type="type"
     :placeholder="inputPlaceholder"
+    autocomplete="off"
   />
 </template>
 
@@ -23,6 +24,11 @@ defineProps({
     type: String || Number,
     required: true
   },
+  id: {
+    type: String,
+    default: ''
+  },
+
   type: {
     type: String,
     default: 'text'

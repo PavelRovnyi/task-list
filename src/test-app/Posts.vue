@@ -1,6 +1,15 @@
 <template>
+  <CustomBtn
+    @click="openPopup"
+    :class="'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'"
+    >Create Post</CustomBtn
+  >
+
+  <CustomModal @showDialog="closeModal" v-show:showDialog="dialogVisible">
+    <CratePostForm @new-post="handleNewPost"></CratePostForm>
+  </CustomModal>
+
   <PostsList @remove="removePost" :posts="defaultPosts"> </PostsList>
-  <CratePostForm @new-post="handleNewPost"></CratePostForm>
 </template>
 
 <script setup lang="ts">
@@ -11,6 +20,18 @@ import type { Post } from '@/test-app/types'
 
 function handleNewPost(newPost: Post) {
   defaultPosts.value.push(newPost)
+}
+
+let dialogVisible = ref(false)
+
+const openPopup = () => {
+  console.log('openPopup')
+  dialogVisible.value = true
+}
+
+const closeModal = () => {
+  console.log('closeModal from root')
+  dialogVisible.value = false
 }
 
 const removePost = (post: Post) => {
