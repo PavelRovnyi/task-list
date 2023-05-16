@@ -9,7 +9,13 @@
     <CratePostForm @new-post="handleNewPost"></CratePostForm>
   </CustomModal>
 
-  <PostsList @remove="removePost" :posts="defaultPosts"> </PostsList>
+  <PostsList 
+  v-if="!isPostsLoading"
+  @remove="removePost" 
+  :posts="defaultPosts">
+  </PostsList>
+  <h3 v-else class="text-3xl font-bold dark:text-white text-center">Loading...</h3>
+ 
 </template>
 
 <script setup lang="ts">
@@ -19,7 +25,7 @@ import PostsList from '@/test-app/PostsList.vue'
 import type { Post } from '@/test-app/types'
 import axios from 'axios'
 
-function handleNewPost(newPost: Post) {
+function handleNewPost(newPost: Post) {  
   defaultPosts.value.push(newPost)
   dialogVisible.value = false
 }
@@ -37,20 +43,23 @@ const closeModal = () => {
   dialogVisible.value = false
 }
 
-const removePost = (post: Post) => {
+const removePost = (post: Post) => { 
   defaultPosts.value = defaultPosts.value.filter((p) => p.id !== post.id)
 }
 
 const fetchPosts = async function (postLimit: number = 10) {
   try {
-    console.log(postLimit)
+    isPostsLoading.value = true
     const response = await axios.get(
       `https://jsonplaceholder.typicode.com/posts?_limit=${postLimit}`
     )
-    defaultPosts = response.data
-    console.log(response)
+
+    defaultPosts.value = response.data
   } catch (e) {
     alert('Something went wrong')
+  }
+  finally { 
+    isPostsLoading.value = false
   }
 }
 

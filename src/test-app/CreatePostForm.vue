@@ -53,7 +53,9 @@ const createPost = () => {
   const newPost = {
     id: Date.now(),
     title: title.value,
-    body: body.value
+    body: body.value,
+    userId: 1
+
   }
   emits('new-post', newPost)
 
