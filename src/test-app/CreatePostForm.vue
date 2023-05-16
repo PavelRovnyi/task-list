@@ -46,17 +46,15 @@ const emits = defineEmits({
 const posts: Post[] = []
 
 const createPost = () => {
-  console.log(title.value)
-  console.log(body.value)
   if (!title.value || !body.value) return false
 
   const newPost = {
     id: Date.now(),
     title: title.value,
     body: body.value,
-    userId: 1
-
+    userId: 1 as number
   }
+
   emits('new-post', newPost)
 
   title.value = ''

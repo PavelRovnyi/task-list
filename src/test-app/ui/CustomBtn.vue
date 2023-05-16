@@ -1,5 +1,5 @@
 <template>
-  <button :class="class">
+  <button :class="customClass">
     <slot></slot>
   </button>
 </template>
@@ -8,7 +8,7 @@
 const name: string = 'CustomBtn'
 
 defineProps({
-  class: {
+  customClass: {
     type: String,
     default: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mt-5 rounded'
   },

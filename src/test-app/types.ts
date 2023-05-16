@@ -4,3 +4,8 @@ export interface Post {
   body: string;
   userId: string;
 }
+
+export interface Option {
+  value: string;
+  name: string;  
+}

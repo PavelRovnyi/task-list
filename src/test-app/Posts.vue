@@ -1,31 +1,30 @@
 <template>
-  <CustomBtn
-    @click="openPopup"
-    :class="'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-5'"
-    >Create Post</CustomBtn
-  >
+  <div class="btn-wrap flex justify-between">
+    <CustomBtn
+      @click="openPopup"
+      :customClass="'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-5'"
+      >Create Post
+    </CustomBtn>
+
+    <CustomSelect v-model:selectedOption="selectedSort" :options="sortOptions"> </CustomSelect>
+  </div>
 
   <CustomModal @showDialog="closeModal" v-show:showDialog="dialogVisible">
     <CratePostForm @new-post="handleNewPost"></CratePostForm>
   </CustomModal>
 
-  <PostsList 
-  v-if="!isPostsLoading"
-  @remove="removePost" 
-  :posts="defaultPosts">
-  </PostsList>
+  <PostsList v-if="!isPostsLoading" @remove="removePost" :posts="defaultPosts"> </PostsList>
   <h3 v-else class="text-3xl font-bold dark:text-white text-center">Loading...</h3>
- 
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import CratePostForm from '@/test-app/CreatePostForm.vue'
 import PostsList from '@/test-app/PostsList.vue'
-import type { Post } from '@/test-app/types'
+import type { Post, Option } from '@/test-app/types'
 import axios from 'axios'
 
-function handleNewPost(newPost: Post) {  
+function handleNewPost(newPost: Post) {
   defaultPosts.value.push(newPost)
   dialogVisible.value = false
 }
@@ -33,17 +32,21 @@ function handleNewPost(newPost: Post) {
 let dialogVisible = ref(false)
 let defaultPosts = ref<Array<Post>>([])
 let isPostsLoading = ref(false)
+let selectedSort = ref('')
+let sortOptions = ref<Array<Option>>([
+  { value: 'title', name: 'By name' },
+  { value: 'body', name: 'By content' }
+])
 
 const openPopup = () => {
   dialogVisible.value = true
 }
 
 const closeModal = () => {
-  console.log('closeModal from root')
   dialogVisible.value = false
 }
 
-const removePost = (post: Post) => { 
+const removePost = (post: Post) => {
   defaultPosts.value = defaultPosts.value.filter((p) => p.id !== post.id)
 }
 
@@ -57,8 +60,7 @@ const fetchPosts = async function (postLimit: number = 10) {
     defaultPosts.value = response.data
   } catch (e) {
     alert('Something went wrong')
-  }
-  finally { 
+  } finally {
     isPostsLoading.value = false
   }
 }
