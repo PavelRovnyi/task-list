@@ -2,13 +2,15 @@
   <div class="wrap" v-if="posts.length > 0">
     <h3 class="text-3xl font-bold dark:text-white text-center">Posts list ({{ posts.length }})</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-5">
-      <PostsList
-        v-for="post in posts"
-        :key="post.id"
-        :post="post"
-        @remove:post="$emit('remove', post)"
-      >
-      </PostsList>
+      <transition-group name="post-list">
+        <PostsList
+          v-for="post in posts"
+          :key="post.id"
+          :post="post"
+          @remove:post="$emit('remove', post)"
+        >
+        </PostsList>
+      </transition-group>
     </div>
   </div>
   <div v-else>
@@ -25,3 +27,21 @@ defineProps<{
   posts: Post[]
 }>()
 </script>
+
+<style scoped>
+.post-list-item {
+  transition: all 0.8s ease;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.post-list-enter-from,
+.post-list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.post-list-leave-active {
+  position: absolute;
+}
+</style>

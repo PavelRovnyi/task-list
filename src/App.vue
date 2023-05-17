@@ -13,5 +13,6 @@ import IconCommunity from './components/icons/IconCommunity.vue'
 </script>
 
 <template>
+  <Test></Test>
   <Posts></Posts>
 </template>

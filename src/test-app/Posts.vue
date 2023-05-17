@@ -83,6 +83,8 @@ const sortedPosts = computed(() => {
   });
 });
 
+
+
 onMounted(() => {
   fetchPosts(6)
 })
