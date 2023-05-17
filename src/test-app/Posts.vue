@@ -13,12 +13,12 @@
     <CratePostForm @new-post="handleNewPost"></CratePostForm>
   </CustomModal>
 
-  <PostsList v-if="!isPostsLoading" @remove="removePost" :posts="defaultPosts"> </PostsList>
+  <PostsList v-if="!isPostsLoading" @remove="removePost" :posts="sortedPosts"> </PostsList>
   <h3 v-else class="text-3xl font-bold dark:text-white text-center">Loading...</h3>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 import CratePostForm from '@/test-app/CreatePostForm.vue'
 import PostsList from '@/test-app/PostsList.vue'
 import type { Post, Option } from '@/test-app/types'
@@ -35,7 +35,8 @@ let isPostsLoading = ref(false)
 let selectedSort = ref('')
 let sortOptions = ref<Array<Option>>([
   { value: 'title', name: 'By name' },
-  { value: 'body', name: 'By content' }
+  { value: 'body', name: 'By content' },
+  { value: 'id', name: 'By ID' }
 ])
 
 const openPopup = () => {
@@ -64,6 +65,23 @@ const fetchPosts = async function (postLimit: number = 10) {
     isPostsLoading.value = false
   }
 }
+
+const sortedPosts = computed(() => {
+  const sortOption = selectedSort.value;
+  
+  return defaultPosts.value.slice().sort((post1, post2) => {
+    const value1 = post1[sortOption];
+    const value2 = post2[sortOption];
+    
+    if (sortOption === 'id') {
+      return (value1 as number) - (value2 as number);
+    } else if (typeof value1 === 'string' && typeof value2 === 'string') {
+      return value1.localeCompare(value2);
+    } else {
+      return 0; // Handle other cases as needed
+    }
+  });
+});
 
 onMounted(() => {
   fetchPosts(6)
