@@ -6,6 +6,13 @@
       >Create Post
     </CustomBtn>
 
+    <CustomInput
+      :id="'search-post'"
+      v-model:inputValue="searchQuery"
+      :inputPlaceholder="'Search...'"
+      :inputClass="'border border-gray-300 rounded px-4 m-5 focus:outline-none focus:ring-2 focus:ring-blue-500'"
+    ></CustomInput>
+
     <CustomSelect v-model:selectedOption="selectedSort" :options="sortOptions"> </CustomSelect>
   </div>
 
@@ -13,7 +20,8 @@
     <CratePostForm @new-post="handleNewPost"></CratePostForm>
   </CustomModal>
 
-  <PostsList v-if="!isPostsLoading" @remove="removePost" :posts="sortedPosts"> </PostsList>
+  <PostsList v-if="!isPostsLoading" @remove="removePost" :posts="sortedAndSearchedPosts">
+  </PostsList>
   <h3 v-else class="text-3xl font-bold dark:text-white text-center">Loading...</h3>
 </template>
 
@@ -33,6 +41,7 @@ let dialogVisible = ref(false)
 let defaultPosts = ref<Array<Post>>([])
 let isPostsLoading = ref(false)
 let selectedSort = ref('')
+let searchQuery = ref('')
 let sortOptions = ref<Array<Option>>([
   { value: 'title', name: 'By name' },
   { value: 'body', name: 'By content' },
@@ -67,23 +76,27 @@ const fetchPosts = async function (postLimit: number = 10) {
 }
 
 const sortedPosts = computed(() => {
-  const sortOption = selectedSort.value;
-  
+  const sortOption = selectedSort.value
+
   return defaultPosts.value.slice().sort((post1, post2) => {
-    const value1 = post1[sortOption];
-    const value2 = post2[sortOption];
-    
+    const value1 = post1[sortOption]
+    const value2 = post2[sortOption]
+
     if (sortOption === 'id') {
-      return (value1 as number) - (value2 as number);
+      return (value1 as number) - (value2 as number)
     } else if (typeof value1 === 'string' && typeof value2 === 'string') {
-      return value1.localeCompare(value2);
+      return value1.localeCompare(value2)
     } else {
-      return 0; // Handle other cases as needed
+      return 0 // Handle other cases as needed
     }
-  });
-});
+  })
+})
 
-
+const sortedAndSearchedPosts = computed(() => {
+  return sortedPosts.value.filter((post) =>
+    post.title.toLocaleLowerCase().includes(searchQuery.value.toLocaleLowerCase())
+  )
+})
 
 onMounted(() => {
   fetchPosts(6)
