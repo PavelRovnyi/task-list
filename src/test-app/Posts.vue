@@ -21,13 +21,16 @@
   </CustomModal>
 
   <PostsList v-if="!isPostsLoading" @remove="removePost" :posts="sortedAndSearchedPosts">
+    <Pagination :currentPage="page" :totalPages="totalPages" @changePage="changePage"> </Pagination>
   </PostsList>
+
   <h3 v-else class="text-3xl font-bold dark:text-white text-center">Loading...</h3>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, watch, computed } from 'vue'
 import CratePostForm from '@/test-app/CreatePostForm.vue'
+import Pagination from '@/test-app/Pagination.vue'
 import PostsList from '@/test-app/PostsList.vue'
 import type { Post, Option } from '@/test-app/types'
 import axios from 'axios'
@@ -42,6 +45,9 @@ let defaultPosts = ref<Array<Post>>([])
 let isPostsLoading = ref(false)
 let selectedSort = ref('')
 let searchQuery = ref('')
+let page = ref(1)
+const limitPostsPrePage = 12
+let totalPages = 0
 let sortOptions = ref<Array<Option>>([
   { value: 'title', name: 'By name' },
   { value: 'body', name: 'By content' },
@@ -60,12 +66,21 @@ const removePost = (post: Post) => {
   defaultPosts.value = defaultPosts.value.filter((p) => p.id !== post.id)
 }
 
-const fetchPosts = async function (postLimit: number = 10) {
+const changePage = (newPage: number) => {
+  page.value = newPage
+}
+
+const fetchPosts = async function () {
   try {
     isPostsLoading.value = true
-    const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts?_limit=${postLimit}`
-    )
+    const response = await axios.get(`https://jsonplaceholder.typicode.com/posts`, {
+      params: {
+        _page: page.value,
+        _limit: limitPostsPrePage
+      }
+    })
+
+    totalPages = Math.ceil(response.headers['x-total-count'] / limitPostsPrePage)
 
     defaultPosts.value = response.data
   } catch (e) {
@@ -93,12 +108,21 @@ const sortedPosts = computed(() => {
 })
 
 const sortedAndSearchedPosts = computed(() => {
-  return sortedPosts.value.filter((post) =>
-    post.title.toLocaleLowerCase().includes(searchQuery.value.toLocaleLowerCase())
-  )
+  const query = searchQuery.value.toString().toLowerCase().trim()
+  let filteredPosts = sortedPosts.value.slice()
+
+  if (query !== '') {
+    filteredPosts = filteredPosts.filter((post) => post.title.toLowerCase().includes(query))
+  }
+
+  return filteredPosts
+})
+
+watch(page, (newPage) => {
+  fetchPosts()
 })
 
 onMounted(() => {
-  fetchPosts(6)
+  fetchPosts()
 })
 </script>

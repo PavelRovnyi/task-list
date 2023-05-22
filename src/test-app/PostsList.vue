@@ -12,6 +12,7 @@
         </PostsList>
       </transition-group>
     </div>
+    <slot></slot>
   </div>
   <div v-else>
     <h3 class="text-3xl font-bold dark:text-white text-center mt-10 text-red-600">Empty list</h3>

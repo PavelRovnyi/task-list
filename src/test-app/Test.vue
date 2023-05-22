@@ -1,6 +1,6 @@
 <template>
   <div class="p-4 bg-white rounded-lg shadow-md">
-    <p class="text-lg font-bold mb-2">Likes: {{ countLikes.number.toFixed(0) }}</p>
+    <p class="text-lg font-bold mb-2">Likes: {{ likes }}</p>
     <p class="text-lg font-bold mb-2">Dislikes: {{ dislikes }}</p>
     <div class="flex justify-center gap-4">
       <button
@@ -32,8 +32,6 @@ const likes = ref(0)
 const dislikes = ref(0)
 
 const incrementLikes = () => {
-  console.log(likes)
-
   likes.value++
 }
 
