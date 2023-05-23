@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import components from '@/test-app/ui/index'
 import './assets/main.css'
+import router from '@/test-app/router/router'
 
 const app = createApp(App)
 
@@ -18,4 +19,5 @@ components.forEach(component => {
   
 })
 
+app.use(router)
 app.mount('#app')
