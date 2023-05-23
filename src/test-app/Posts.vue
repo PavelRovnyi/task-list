@@ -21,10 +21,12 @@
   </CustomModal>
 
   <PostsList v-if="!isPostsLoading" @remove="removePost" :posts="sortedAndSearchedPosts">
-    <Pagination :currentPage="page" :totalPages="totalPages" @changePage="changePage"> </Pagination>
+    <!--<Pagination :currentPage="page" :totalPages="totalPages" @changePage="changePage"> </Pagination> -->
   </PostsList>
 
   <h3 v-else class="text-3xl font-bold dark:text-white text-center">Loading...</h3>
+
+  <div ref="observerRef" class="observer"></div>
 </template>
 
 <script setup lang="ts">
@@ -46,6 +48,7 @@ let isPostsLoading = ref(false)
 let selectedSort = ref('')
 let searchQuery = ref('')
 let page = ref(1)
+const observerRef = ref(null)
 const limitPostsPrePage = 12
 let totalPages = 0
 let sortOptions = ref<Array<Option>>([
@@ -66,9 +69,11 @@ const removePost = (post: Post) => {
   defaultPosts.value = defaultPosts.value.filter((p) => p.id !== post.id)
 }
 
+/*
 const changePage = (newPage: number) => {
   page.value = newPage
 }
+*/
 
 const fetchPosts = async function () {
   try {
@@ -90,6 +95,26 @@ const fetchPosts = async function () {
   }
 }
 
+const loadMorePosts = async function () {
+  try {
+    page.value += 1
+
+    const response = await axios.get(`https://jsonplaceholder.typicode.com/posts`, {
+      params: {
+        _page: page.value,
+        _limit: limitPostsPrePage
+      }
+    })
+
+    totalPages = Math.ceil(response.headers['x-total-count'] / limitPostsPrePage)
+
+    defaultPosts.value = [...defaultPosts.value, ...response.data]
+  } catch (e) {
+    alert('Something went wrong')
+  } finally {
+  }
+}
+
 const sortedPosts = computed(() => {
   const sortOption = selectedSort.value
 
@@ -102,13 +127,14 @@ const sortedPosts = computed(() => {
     } else if (typeof value1 === 'string' && typeof value2 === 'string') {
       return value1.localeCompare(value2)
     } else {
-      return 0 // Handle other cases as needed
+      return 0
     }
   })
 })
 
 const sortedAndSearchedPosts = computed(() => {
   const query = searchQuery.value.toString().toLowerCase().trim()
+
   let filteredPosts = sortedPosts.value.slice()
 
   if (query !== '') {
@@ -118,11 +144,28 @@ const sortedAndSearchedPosts = computed(() => {
   return filteredPosts
 })
 
+/*
 watch(page, (newPage) => {
   fetchPosts()
 })
+*/
 
 onMounted(() => {
   fetchPosts()
+
+  const options = {
+    rootMargin: '0px',
+    threshold: 1.0
+  }
+
+  const callback = (entries) => {
+    if (entries[0].isIntersecting && page.value < totalPages) {
+      loadMorePosts()
+    }
+  }
+
+  const observer = new IntersectionObserver(callback, options)
+
+  observer.observe(observerRef.value)
 })
 </script>
