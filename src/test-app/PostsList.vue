@@ -3,13 +3,13 @@
     <h3 class="text-3xl font-bold dark:text-white text-center">Posts list ({{ posts.length }})</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-5">
       <transition-group name="post-list">
-        <PostsList
+        <SinglePostPreview
           v-for="post in posts"
           :key="post.id"
           :post="post"
           @remove:post="$emit('remove', post)"
         >
-        </PostsList>
+        </SinglePostPreview>
       </transition-group>
     </div>
     <slot></slot>
@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 import type { Post } from '@/test-app/types'
-import PostsList from '@/test-app/SinglePost.vue'
+import SinglePostPreview from '@/test-app/SinglePostPreview.vue'
 
 defineProps<{
   posts: Post[]

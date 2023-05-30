@@ -5,6 +5,7 @@
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2" for="create-post-id">Title</label>
         <CustomInput
+          v-focus
           :id="'create-post-id'"
           v-model:inputValue.trim="title"
           :inputPlaceholder="'Enter title'"

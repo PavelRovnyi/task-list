@@ -7,6 +7,7 @@
     </CustomBtn>
 
     <CustomInput
+      v-focus
       :id="'search-post'"
       v-model:inputValue="searchQuery"
       :inputPlaceholder="'Search...'"
@@ -26,7 +27,7 @@
 
   <h3 v-else class="text-3xl font-bold dark:text-white text-center">Loading...</h3>
 
-  <div ref="observerRef" class="observer"></div>
+  <div v-intersection="loadMorePosts" class="observer"></div>
 </template>
 
 <script setup lang="ts">
@@ -152,20 +153,5 @@ watch(page, (newPage) => {
 
 onMounted(() => {
   fetchPosts()
-
-  const options = {
-    rootMargin: '0px',
-    threshold: 1.0
-  }
-
-  const callback = (entries) => {
-    if (entries[0].isIntersecting && page.value < totalPages) {
-      loadMorePosts()
-    }
-  }
-
-  const observer = new IntersectionObserver(callback, options)
-
-  observer.observe(observerRef.value)
 })
 </script>
